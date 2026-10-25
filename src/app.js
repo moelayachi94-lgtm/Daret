@@ -10,6 +10,7 @@ const dateError = document.querySelector("#date-debut-erreur");
 const participants = document.getElementById("participants-liste");
 const participantsErreur = document.getElementById("participants-erreur");
 const ajouterParticipant = document.getElementById("ajouter-participant");
+const compteur = document.getElementById("participants-compteur")
 const nameRegex = /^[\p{L}0-9 -]+$/u;
 
 nom.addEventListener("input", () => {
@@ -75,7 +76,6 @@ function creeParticipant() {
     participantsErreur.classList.remove("hidden");
     participantsErreur.textContent =
       "Vous ne pouvez pas créer plus de 20 utilisateurs.";
-    return;
   }
   const itemList = document.createElement("li");
   const participantInput = document.createElement("input");
@@ -94,11 +94,11 @@ function creeParticipant() {
 
   participantRemove.type = "button";
   participantRemove.style.marginTop = "10px";
+  participantRemove.style.cursor = "pointer";
   participantRemove.classList.add(
     "border",
     "w-full",
     "rounded",
-    "mt-5",
     "py-2",
   );
   participantRemove.textContent = "Remove";
@@ -124,11 +124,25 @@ function creeParticipant() {
   itemList.appendChild(participantRemove);
   itemList.appendChild(participantsMsg);
   participants.appendChild(itemList);
+  count();
 }
 participants.addEventListener("click", (event) => {
   const bouton = event.target;
   if (bouton.tagName === "BUTTON") {
-    if (participants.children.length > 2) {
+
+  }if (participants.children.length > 2) {
+      
+      bouton.parentElement.remove()
+      count()
     }
-  }
 });
+
+creeParticipant()
+creeParticipant()
+creeParticipant()
+count()
+
+function count(){
+  const num = participants.children.length 
+  compteur.textContent = `${num} participant`
+}
